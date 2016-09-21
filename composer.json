@@ -1,0 +1,25 @@
+{
+    "name": "dilab/oss-omnipay-2c2p",
+    "description": "2c2p gateway for Omnipay payment processing library",
+    "keywords": [
+        "gateway",
+        "merchant",
+        "omnipay",
+        "2c2p"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xu ding",
+            "email": "thedilab@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "omnipay/common": "~2.0"
+    },
+    "require-dev": {
+        "omnipay/tests": "~2.0"
+    }
+}
