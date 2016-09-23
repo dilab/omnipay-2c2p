@@ -15,7 +15,7 @@ class RedirectGateway extends AbstractGateway
 
     public function getName()
     {
-        return '2c2p';
+        return '2c2p Redirect';
     }
 
     public function getDefaultParameters()
