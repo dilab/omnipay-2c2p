@@ -10,6 +10,8 @@ namespace Omnipay\CreditCardPaymentProcessor\Message;
 
 abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
 {
+    const VERSION = '6.9';
+
     public function getInvoiceNo()
     {
         return $this->getParameter('invoiceNo');

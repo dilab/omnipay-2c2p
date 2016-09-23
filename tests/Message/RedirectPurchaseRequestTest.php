@@ -56,9 +56,19 @@ class RedirectPurchaseRequestTest extends TestCase
         $resultUrl2 = 'https://www.example.com/notify';
         $customerEmail = 'xuding@spacebib.com';
 
-        $strSignatureString = $version . $merchantId . $paymentDescription . $orderId . $invoiceNo .
-            $currency . $amount . $customerEmail . $resultUrl1 . $resultUrl2;
-        $hashValue = hash_hmac('sha1', $strSignatureString, 'secret_test', false);
+        $strSignatureString =
+            $version .
+            $merchantId .
+            $paymentDescription .
+            $orderId .
+            $invoiceNo .
+            $currency .
+            $amount .
+            $customerEmail .
+            $resultUrl1 .
+            $resultUrl2;
+
+        $hashValue = strtoupper(hash_hmac('sha1', $strSignatureString, 'secret_test', false));
 
         $expected = [
             'version' => '6.9',
@@ -101,6 +111,9 @@ class RedirectPurchaseRequestTest extends TestCase
     {
         $this->request->initialize($this->options);
 
-        $this->assertInstanceOf(RedirectPurchaseResponse::class, $this->request->sendData($this->request->getData()));
+        $this->assertInstanceOf(
+            RedirectPurchaseResponse::class,
+            $this->request->sendData($this->request->getData())
+        );
     }
 }
