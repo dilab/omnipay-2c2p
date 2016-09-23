@@ -57,4 +57,12 @@ abstract class AbstractRequest extends \Omnipay\Common\Message\AbstractRequest
             'notifyUrl'
         );
     }
+
+    protected function emptyIfNotFound($haystack, $needle)
+    {
+        if (!isset($haystack[$needle])) {
+            return '';
+        }
+        return $haystack[$needle];
+    }
 }

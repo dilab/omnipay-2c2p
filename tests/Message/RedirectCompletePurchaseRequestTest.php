@@ -41,7 +41,7 @@ class RedirectCompletePurchaseRequestTest extends TestCase
     private $dataAlternativePaymentResponse = [
         'version' => '6.9',
         'request_timestamp' => '2016-03-01 15:28:22',
-        'merchant_id' => 'your merchant ID',
+        'merchant_id' => 'merchant_123',
         'currency' => '764',
         'order_id' => '010316153510381',
         'amount' => '000000002500',
@@ -65,7 +65,7 @@ class RedirectCompletePurchaseRequestTest extends TestCase
         'user_defined_4' => '',
         'user_defined_5' => '',
         'browser_info' => 'Type=Firefox44,Name=Firefox,Ver=44.0',
-        'hash_value' => ''
+        'hash_value' => '1234567'
     ];
 
     /**
@@ -143,7 +143,7 @@ class RedirectCompletePurchaseRequestTest extends TestCase
             $this->dataPaymentResponse['browser_info'];
 
 
-        $expected = hash_hmac('sha1', $strToHash, 'secret_test', false);
+        $expected = strtoupper(hash_hmac('sha1', $strToHash, 'secret_test', false));
 
         $this->getHttpRequest()->request->replace($this->dataPaymentResponse);
 
@@ -171,6 +171,7 @@ class RedirectCompletePurchaseRequestTest extends TestCase
             $this->dataAlternativePaymentResponse['channel_response_code'] .
             $this->dataAlternativePaymentResponse['channel_response_desc'] .
             $this->dataAlternativePaymentResponse['masked_pan'] .
+            $this->dataAlternativePaymentResponse['backend_invoice'] .
             $this->dataAlternativePaymentResponse['user_defined_1'] .
             $this->dataAlternativePaymentResponse['user_defined_2'] .
             $this->dataAlternativePaymentResponse['user_defined_3'] .
@@ -179,7 +180,7 @@ class RedirectCompletePurchaseRequestTest extends TestCase
             $this->dataAlternativePaymentResponse['browser_info'];
 
 
-        $expected = hash_hmac('sha1', $strToHash, 'secret_test', false);
+        $expected = strtoupper(hash_hmac('sha1', $strToHash, 'secret_test', false));
 
         $this->getHttpRequest()->request->replace($this->dataAlternativePaymentResponse);
 

@@ -32,7 +32,7 @@ class RedirectCompletePurchaseResponse extends AbstractResponse
 
         $this->paymentStatus = $this->data['payment_status'];
 
-        if ($this->data['hash_value'] != $this->data['computed_hash_value']) {
+        if (strtoupper($this->data['hash_value']) != strtoupper($this->data['computed_hash_value'])) {
             $this->paymentStatus = '1000';
             return;
         }
