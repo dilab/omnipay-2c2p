@@ -84,8 +84,8 @@ class RedirectCompletePurchaseRequestTest extends TestCase
                 'email' => 'xuding@spacebib.com',
                 'number' => '93804194'
             ],
-            'amount' => 199900,
-            'currency' => 'JPY',
+            'amount' => 1999.00,
+            'currency' => 'THB',
             'description' => 'Marina Run 2016',
             'transactionId' => 12,
             'returnUrl' => 'https://www.example.com/return',
@@ -117,7 +117,6 @@ class RedirectCompletePurchaseRequestTest extends TestCase
 
     public function testGetData_payment_request_computed_hash_value()
     {
-
         $strToHash =
             $this->dataPaymentResponse['version'] .
             $this->dataPaymentResponse['request_timestamp'] .
@@ -141,7 +140,6 @@ class RedirectCompletePurchaseRequestTest extends TestCase
             $this->dataPaymentResponse['user_defined_4'] .
             $this->dataPaymentResponse['user_defined_5'] .
             $this->dataPaymentResponse['browser_info'];
-
 
         $expected = strtoupper(hash_hmac('sha1', $strToHash, 'secret_test', false));
 

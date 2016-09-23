@@ -17,6 +17,10 @@ class RedirectGatewayTest extends GatewayTestCase
 
         $this->gateway = new RedirectGateway($this->getHttpClient(), $this->getHttpRequest());
 
+        $this->gateway->setMerchantId('merchant_123');
+
+        $this->gateway->setSecretKey('secret_test');
+
         $this->options = [
             'card' => [
                 'firstName' => 'Xu',
@@ -24,13 +28,13 @@ class RedirectGatewayTest extends GatewayTestCase
                 'email' => 'xuding@spacebib.com',
                 'number' => '93804194'
             ],
-            'amount' => 199900,
-            'currency' => 'JPY',
+            'amount' => 1999.00,
+            'currency' => 'THB',
             'description' => 'Marina Run 2016',
             'transactionId' => 12,
             'returnUrl' => 'https://www.example.com/return',
-            'cancelUrl' => 'https://www.example.com/cancel',
             'notifyUrl' => 'https://www.example.com/notify',
+            'invoiceNo' => '20191212-123123'
         ];
 
     }
@@ -73,7 +77,7 @@ class RedirectGatewayTest extends GatewayTestCase
             'user_defined_5' => '',
             'browser_info' => '',
             'eci' => '6',
-            'hash_value' => '1234567',
+            'hash_value' => 'B25609841046BD5E7C78912717A0CBB4DE2592EB'
         ]);
 
         $response = $this->gateway->completePurchase($this->options)->send();

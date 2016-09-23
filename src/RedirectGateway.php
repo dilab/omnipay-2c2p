@@ -26,6 +26,26 @@ class RedirectGateway extends AbstractGateway
         ];
     }
 
+    public function getMerchantId()
+    {
+        return $this->getParameter('merchantId');
+    }
+
+    public function setMerchantId($merchantId)
+    {
+        return $this->setParameter('merchantId', $merchantId);
+    }
+
+    public function getSecretKey()
+    {
+        return $this->getParameter('secretKey');
+    }
+
+    public function setSecretKey($secretKey)
+    {
+        return $this->setParameter('secretKey', $secretKey);
+    }
+
     public function purchase(array $parameters = array())
     {
         return $this->createRequest('\Omnipay\CreditCardPaymentProcessor\Message\RedirectPurchaseRequest', $parameters);
