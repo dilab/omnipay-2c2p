@@ -50,7 +50,7 @@ class RedirectPurchaseRequestTest extends TestCase
         $orderId = '000000000012';
         $invoiceNo = '20191212-123123';
         $amount = '000000001000';
-        $currency = 'THB';
+        $currency = '764';
         $resultUrl1 = 'https://www.example.com/return';
         $resultUrl2 = 'https://www.example.com/notify';
         $customerEmail = 'xuding@spacebib.com';

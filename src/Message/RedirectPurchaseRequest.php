@@ -15,64 +15,54 @@ class RedirectPurchaseRequest extends AbstractRequest
             'invoice_no' => $this->getInvoiceNo(),
             'amount' => $this->amount(),
             'currency' => $this->getCurrencyNumeric(),
-            'hash_value' => $this->hashValue(),
             'result_url_1' => $this->getReturnUrl(),
             'result_url_2' => $this->getNotifyUrl(),
             'customer_email' => $this->getCard()->getEmail()
         ];
 
+        $data['hash_value'] = $this->hashValue($data);
+
         return $data;
     }
 
-    private function hashValue()
+    private function hashValue($data)
     {
-//        version +
-//        merchant_id +
-//        payment_description +
-//        order_id +
-//        invoice_no +
-//        currency +
-//        amount +
-//        customer_email +
-//        pay_category_id +
-//        promotion +
-//        user_defined_1 +
-//        user_defined_2 +
-//        user_defined_3 +
-//        user_defined_4 +
-//        user_defined_5 +
-//        result_url_1 +
-//        result_url_2 +
-//        enable_store_card +
-//        stored_card_unique_id +
-//        pan_masked +
-//        request_3ds +
-//        recurring +
-//        order_prefix +
-//        recurring_amount +
-//        allow_accumulate +
-//        max_accumulate_amount +
-//        recurring_interval +
-//        recurring_count +
-//        charge_next_date +
-//        charge_on_date +
-//        payment_option +
-//        ipp_interest_type +
-//        payment_expiry +
-//        default_lang +
-//        statement_description
-
         $strToHash =
-            self::VERSION .
-            $this->getMerchantId() .
-            $this->getDescription() .
-            $this->orderId() .
-            $this->getInvoiceNo() .
-            $this->getCurrency() .
-            $this->amount() .
-            $this->getCard()->getEmail() .
-            $this->getReturnUrl() .
-            $this->getNotifyUrl();
+            $this->emptyIfNotFound($data, 'version') .
+            $this->emptyIfNotFound($data, 'merchant_id') .
+            $this->emptyIfNotFound($data, 'payment_description') .
+            $this->emptyIfNotFound($data, 'order_id') .
+            $this->emptyIfNotFound($data, 'invoice_no') .
+            $this->emptyIfNotFound($data, 'currency') .
+            $this->emptyIfNotFound($data, 'amount') .
+            $this->emptyIfNotFound($data, 'customer_email') .
+            $this->emptyIfNotFound($data, 'pay_category_id') .
+            $this->emptyIfNotFound($data, 'promotion') .
+            $this->emptyIfNotFound($data, 'user_defined_1') .
+            $this->emptyIfNotFound($data, 'user_defined_2') .
+            $this->emptyIfNotFound($data, 'user_defined_3') .
+            $this->emptyIfNotFound($data, 'user_defined_4') .
+            $this->emptyIfNotFound($data, 'user_defined_5') .
+            $this->emptyIfNotFound($data, 'result_url_1') .
+            $this->emptyIfNotFound($data, 'result_url_2') .
+            $this->emptyIfNotFound($data, 'enable_store_card') .
+            $this->emptyIfNotFound($data, 'user_defined_5') .
+            $this->emptyIfNotFound($data, 'pan_masked') .
+            $this->emptyIfNotFound($data, 'request_3ds') .
+            $this->emptyIfNotFound($data, 'recurring') .
+            $this->emptyIfNotFound($data, 'order_prefix') .
+            $this->emptyIfNotFound($data, 'recurring_amount') .
+            $this->emptyIfNotFound($data, 'allow_accumulate') .
+            $this->emptyIfNotFound($data, 'max_accumulate_amount') .
+            $this->emptyIfNotFound($data, 'recurring_interval') .
+            $this->emptyIfNotFound($data, 'recurring_count') .
+            $this->emptyIfNotFound($data, 'charge_next_date') .
+            $this->emptyIfNotFound($data, 'charge_on_date') .
+            $this->emptyIfNotFound($data, 'payment_option') .
+            $this->emptyIfNotFound($data, 'ipp_interest_type') .
+            $this->emptyIfNotFound($data, 'payment_expiry') .
+            $this->emptyIfNotFound($data, 'default_lang') .
+            $this->emptyIfNotFound($data, 'statement_descriptor');
 
         return strtoupper(hash_hmac('sha1', $strToHash, $this->getSecretKey(), false));
     }
