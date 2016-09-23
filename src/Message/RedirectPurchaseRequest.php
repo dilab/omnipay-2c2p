@@ -15,7 +15,7 @@ class RedirectPurchaseRequest extends AbstractRequest
             'order_id' => $this->orderId(),
             'invoice_no' => $this->getInvoiceNo(),
             'amount' => $this->amount(),
-            'currency' => $this->getCurrency(),
+            'currency' => $this->getCurrencyNumeric(),
             'hash_value' => $this->hashValue(),
             'result_url_1' => $this->getReturnUrl(),
             'result_url_2' => $this->getNotifyUrl(),

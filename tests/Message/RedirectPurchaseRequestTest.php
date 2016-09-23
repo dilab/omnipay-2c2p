@@ -67,7 +67,7 @@ class RedirectPurchaseRequestTest extends TestCase
             'order_id' => '000000000012',
             'invoice_no' => '20191212-123123',
             'amount' => '000000001000',
-            'currency' => 'THB',
+            'currency' => '764',
             'hash_value' => $hashValue,
             'result_url_1' => 'https://www.example.com/return',
             'result_url_2' => 'https://www.example.com/notify',

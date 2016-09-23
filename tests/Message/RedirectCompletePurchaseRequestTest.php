@@ -72,4 +72,9 @@ class RedirectCompletePurchaseRequestTest extends TestCase
         $this->assertSame('a4THdPHQG9jT3DPZZ/mabkXUqow=', $data['computed_hash_value']);
     }
 
+    //https://developer.2c2p.com/docs/redirect-variables
+    private function hashValue()
+    {
+
+    }
 }
