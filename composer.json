@@ -1,5 +1,5 @@
 {
-    "name": "dilab/oss-omnipay-2c2p",
+    "name": "dilab/omnipay-2c2p",
     "description": "2c2p gateway for Omnipay payment processing library",
     "keywords": [
         "gateway",
