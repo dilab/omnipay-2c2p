@@ -15,7 +15,7 @@ class RedirectGateway extends AbstractGateway
 
     public function getName()
     {
-        return '2c2p Redirect';
+        return 'CreditCardPaymentProcessor Redirect';
     }
 
     public function getDefaultParameters()
