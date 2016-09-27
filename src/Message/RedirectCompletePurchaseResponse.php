@@ -15,7 +15,7 @@ class RedirectCompletePurchaseResponse extends AbstractResponse
 {
     const SUCCESS_CODE = '000';
 
-    private $paymentStatus;
+    const PENDING_CODE = '001';
 
     private $paymentStatusMessages = [
         '000' => 'Success using credit/debit card (Authorized) or Success when paid with cash channel (Paid)',
@@ -30,22 +30,26 @@ class RedirectCompletePurchaseResponse extends AbstractResponse
     {
         parent::__construct($request, $data);
 
-        $this->paymentStatus = $this->data['payment_status'];
+        $this->data['payment_status'] = $this->data['payment_status'];
 
         if (strtoupper($this->data['hash_value']) != strtoupper($this->data['computed_hash_value'])) {
-            $this->paymentStatus = '1000';
-            return;
+            $this->data['payment_status'] = '1000';
         }
     }
 
     public function isSuccessful()
     {
-        return $this->paymentStatus == self::SUCCESS_CODE;
+        return $this->data['payment_status'] == self::SUCCESS_CODE;
+    }
+
+    public function isPending()
+    {
+        return $this->data['payment_status'] == self::PENDING_CODE;
     }
 
     public function getMessage()
     {
-        return $this->paymentStatusMessages[$this->paymentStatus];
+        return $this->paymentStatusMessages[$this->data['payment_status']];
     }
 
     public function getTransactionReference()

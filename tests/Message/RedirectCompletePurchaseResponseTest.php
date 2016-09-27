@@ -44,11 +44,27 @@ class RedirectCompletePurchaseResponseTest extends TestCase
         ];
     }
 
+    public function testConstruct_payment_response_is_pending()
+    {
+        $this->data['payment_status'] = '001';
+
+        $response = new RedirectCompletePurchaseResponse($this->getMockRequest(), $this->data);
+
+        $this->assertFalse($response->isSuccessful());
+        $this->assertTrue($response->isPending());
+        $this->assertFalse($response->isCancelled());
+        $this->assertEquals('Pending (Waiting customer to pay)', $response->getMessage());
+        $this->assertEquals('12345', $response->getTransactionReference());
+        $this->assertSame(123456, $response->getTransactionId());
+        $this->assertFalse($response->isTransparentRedirect());
+    }
+
     public function testConstruct_payment_response_success()
     {
         $response = new RedirectCompletePurchaseResponse($this->getMockRequest(), $this->data);
 
         $this->assertTrue($response->isSuccessful());
+        $this->assertFalse($response->isPending());
         $this->assertFalse($response->isRedirect());
         $this->assertFalse($response->isCancelled());
         $this->assertEquals('Success using credit/debit card (Authorized) or Success when paid with cash channel (Paid)', $response->getMessage());
