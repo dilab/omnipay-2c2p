@@ -17,7 +17,7 @@ to your `composer.json` file:
 ```json
 {
     "require": {
-        "dilab/omnipay-2c2p": "~1.0"
+        "dilab/omnipay-2c2p": "~2.0"
     }
 }
 ```
